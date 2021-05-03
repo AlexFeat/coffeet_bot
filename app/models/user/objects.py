@@ -11,7 +11,7 @@ from sqlalchemy import (
     ForeignKey,
     PrimaryKeyConstraint,
 )
-from .meets import meets_table
+#from .meets import meets_table
 
 metadata = MetaData()
 
@@ -22,11 +22,12 @@ users_table = Table(
     Column('name', String, nullable=False),
     Column('date_birthday', Date, nullable=True),
     Column('telegram_id', String, nullable=False),
-    Column('moderation_status', SmallInteger, nullable=False, default=0, server_default=0),
+    Column('moderated_status', SmallInteger, nullable=False, default='0', server_default='0'),
     Column('ts_create', DateTime, nullable=False, default=dt.utcnow(), server_default='now()'),
-    schema='users',
+    schema='user',
 )
 
+'''
 user_ratings_table = Table(
     'ratings',
     metadata,
@@ -36,5 +37,6 @@ user_ratings_table = Table(
     Column('rating', SmallInteger, nullable=False, default=5, server_default=5),
     Column('comment', String, nullable=True, default='', server_default=''),
     PrimaryKeyConstraint('user_id', 'meet_id', name='rating_pk'),
-    schema='users',
+    schema='user',
 )
+'''

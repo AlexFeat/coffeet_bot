@@ -4,14 +4,10 @@ from sqlalchemy import (
     MetaData,
     Column,
     Integer,
-    String,
-    Date,
     DateTime,
-    SmallInteger,
     ForeignKey,
-    PrimaryKeyConstraint,
 )
-from .users import users_table
+from ..user.objects import users_table
 
 
 metadata = MetaData()
