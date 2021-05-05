@@ -10,6 +10,7 @@ async def echo_me(message: types.Message):
 Пользовател {user.name} (id: {user.id})
 Создан: {user.ts_create}
 Статус: {user.moderated}
+Активен: {(user.is_active and 'Да') or'Нет'}
     '''
     return await message.answer(text)
 

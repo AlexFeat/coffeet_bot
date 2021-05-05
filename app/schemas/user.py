@@ -22,6 +22,7 @@ class User(BaseModel):
     telegram_id: int
     moderated_status: int
     ts_create: datetime
+    is_active: bool
 
     @property
     def name(self):
@@ -43,12 +44,12 @@ class User(BaseModel):
         usr_query = user_object.select().where(user_object.c.telegram_id == data.id).limit(1)
         usr = await pg.fetchrow(usr_query)
         if usr is None:
-            usr_ins_query = user.objects.users_table.insert().values(
+            usr_ins_query = user_object.insert().values(
                 telegram_id=data.id,
                 first_name=data.first_name,
                 last_name=data.last_name,
                 moderated_status=1,
-            ).returning(user.objects.users_table)
+            ).returning(user_object)
             usr = await pg.fetchrow(usr_ins_query)
         return User(**usr)
 
