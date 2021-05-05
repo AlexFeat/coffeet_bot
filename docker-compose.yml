@@ -4,7 +4,7 @@ services:
   pg:
     image: postgres:12
     ports:
-      - 5432:5432
+      - ${DB_PORT}:${DB_PORT}
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
@@ -20,3 +20,10 @@ services:
     command: uvicorn main:app
     depends_on:
       - pg
+  watcher:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    command: python scripts/resend_tg_msg.py
+    depends_on:
+      - app

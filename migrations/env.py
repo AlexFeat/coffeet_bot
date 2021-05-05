@@ -20,6 +20,8 @@ config.set_section_option(section, "DB_USER", dotenv_values(".env").get("DB_USER
 config.set_section_option(section, "DB_PASS", dotenv_values(".env").get("DB_PASS"))
 config.set_section_option(section, "DB_NAME", dotenv_values(".env").get("DB_NAME"))
 config.set_section_option(section, "DB_HOST", dotenv_values(".env").get("DB_HOST"))
+config.set_section_option(section, "DB_PORT", dotenv_values(".env").get("DB_PORT"))
+
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
