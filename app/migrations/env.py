@@ -6,7 +6,7 @@ from sqlalchemy import pool
 from alembic import context
 from dotenv import dotenv_values
 
-from app.models import (
+from models import (
     user,
     meet,
 )
@@ -14,6 +14,7 @@ from app.models import (
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
+
 
 section = config.config_ini_section
 config.set_section_option(section, "DB_USER", dotenv_values(".env").get("DB_USER"))
@@ -35,6 +36,7 @@ target_metadata = [
     user.objects.metadata,
     user.ratings.metadata,
     meet.objects.metadata,
+    meet.requests.metadata,
 ]
 
 # other values from the config, defined by the needs of env.py,
@@ -82,10 +84,13 @@ def run_migrations_online():
 
     with connectable.connect() as connection:
         context.configure(
-            connection=connection, target_metadata=target_metadata
+            connection=connection,
+            target_metadata=target_metadata,
+            include_schemas=True,
         )
 
         with context.begin_transaction():
+            context.execute('SET search_path TO public')
             context.run_migrations()
 
 

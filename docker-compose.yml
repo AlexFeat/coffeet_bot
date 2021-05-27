@@ -15,9 +15,9 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - 8000:8000
-    volumes:
-      - ./app:/var/app
-    command: uvicorn main:app
+#    volumes:
+#      - ./app:/var/app
+    command: python main.py
     depends_on:
       - pg
   watcher:

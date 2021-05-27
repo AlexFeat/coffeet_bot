@@ -1,5 +1,5 @@
 from aiogram import Bot, Dispatcher, types
-from app.plugins.telegram.dependencies import bot_dispatcher
+from plugins.telegram.dependencies import bot_dispatcher
 from fastapi import APIRouter, Body, Depends
 from typing import (
     Dict,
@@ -12,7 +12,7 @@ router = APIRouter(
 
 
 @router.post("/tg")
-async def cb_tg(request: Dict[str, Any] = Body(...), dp: Dispatcher = Depends(bot_dispatcher)):
+async def callback_telegram(request: Dict[str, Any] = Body(...), dp: Dispatcher = Depends(bot_dispatcher)):
     Bot.set_current(dp.bot)
     Dispatcher.set_current(dp)
     telegram_update = types.Update(**request)

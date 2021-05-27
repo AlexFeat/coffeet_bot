@@ -8,12 +8,7 @@ Run
 
 ````
 % docker-compose up -d --build
+% docker-compose exec app sh -c 'alembic upgrade head'
 ````
 
-and go to http://127.0.0.1:8000/docs
-
-## How to run tests
-
-````
-% docker-compose exec app python -m pytest app/tests
-````
+and go to http://0.0.0.0:8000/

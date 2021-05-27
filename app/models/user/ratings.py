@@ -9,8 +9,8 @@ from sqlalchemy import (
     ForeignKey,
     PrimaryKeyConstraint,
 )
-from ..meet.objects import meets_table
-from .objects import users_table
+from models.meet.objects import meets_table
+from models.user.objects import users_table
 
 metadata = MetaData()
 

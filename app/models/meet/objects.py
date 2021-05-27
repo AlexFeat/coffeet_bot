@@ -7,11 +7,17 @@ from sqlalchemy import (
     DateTime,
     ForeignKey,
 )
-from ..user.objects import users_table
+
+from models.user.objects import users_table
 
 
 metadata = MetaData()
 
+'''
+TODO
+    дата и время начала встречи
+    место встречи
+'''
 meets_table = Table(
     'items',
     metadata,

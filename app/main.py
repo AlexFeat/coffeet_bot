@@ -2,9 +2,8 @@
 
 import uvicorn
 from fastapi import FastAPI
-from app.routers import root, callback
-from app.models import database
-
+from routers import root, callback
+from models import database
 
 app = FastAPI()
 

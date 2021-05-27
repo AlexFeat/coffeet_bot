@@ -2,8 +2,8 @@ from typing import Optional
 from pydantic import BaseModel
 from datetime import date, datetime
 
-from app.models import pg
-from app.models.user.objects import users_table as user_object
+from models import pg
+from models.user.objects import users_table as user_object
 
 moderated_enum = {
     0: 'Не определён',

@@ -1,7 +1,11 @@
 from aiogram import Dispatcher
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
+from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
-from app.plugins.telegram.bot import bot
+from plugins.telegram.bot import bot
 
-dispatcher = Dispatcher(bot)
+# TODO Redis
+storage = MemoryStorage()
+
+dispatcher = Dispatcher(bot, storage=storage)
 dispatcher.middleware.setup(LoggingMiddleware())

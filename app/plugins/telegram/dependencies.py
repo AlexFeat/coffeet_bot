@@ -1,4 +1,4 @@
-from app.plugins.telegram.dispatcher import dispatcher
+from plugins.telegram.dispatcher import dispatcher
 from aiogram import (
     Dispatcher,
     Bot,

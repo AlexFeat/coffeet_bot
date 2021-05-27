@@ -1,4 +1,4 @@
-from ..user import objects, ratings
+from models.user import objects, ratings
 
 __all__ = [
     objects,

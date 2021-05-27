@@ -1,4 +1,4 @@
-from app.plugins.telegram import fsm
+from plugins.telegram import handlers
 
 
 __all__ = [

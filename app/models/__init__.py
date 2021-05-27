@@ -1,5 +1,5 @@
-from app.models.database import pg
-from app.models import (
+from models.database import pg
+from models import (
     user,
     meet,
 )
