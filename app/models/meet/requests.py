@@ -29,7 +29,7 @@ meet_requests_table = Table(
            comment='Встреча должна закнчиться не позже указанного времени'),
     Column('date_expire', Date, nullable=False,
            comment='Дата истечения срока актуальности заявки'),
-    Column('status', SmallInteger, nullable=False, default="1", server_default="1",
+    Column('status', SmallInteger, nullable=False, default=1, server_default="1",
            comment='Статус заявки'),
     schema='meet',
 )
