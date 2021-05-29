@@ -24,7 +24,7 @@ class MeetRequestState(StatesGroup):
 @dispatcher.message_handler(commands=['help', 'start'])
 async def echo_help(message: types.Message):
     await User.get_by_tg(message.from_user)
-    text = f'''
+    text = '''
 /help - подсказки по командам
 /me - информация о себе
 /meet_request_add - создать заявку
@@ -48,16 +48,18 @@ async def echo_me(message: types.Message):
 
 @dispatcher.message_handler(commands=['rating'])
 async def echo_rating(message: types.Message):
-    return await message.answer("The command 'rating' is not yet supported. Sorry!")
+    return await message.answer(
+        "The command 'rating' is not yet supported. Sorry!")
 
 
 @dispatcher.message_handler(commands=['meet_request_list'])
-async def send_meet_request(message: types.Message):
+async def add_meet_request(message: types.Message):
     user = await User.get_by_tg(message.from_user)
     strings = []
     for mr in await MeetRequest.get_firsts(user.id, 5):
         strings.append(
-            md.text('Встреча', f'{mr.date_meet},', 'время начала с', mr.meet_from, 'до', mr.meet_to)
+            md.text('Встреча', f'{mr.date_meet},',
+                    'время начала с', mr.meet_from, 'до', mr.meet_to)
         )
         strings.append(
             md.text('Актуальна до', mr.date_expire)
@@ -99,7 +101,7 @@ async def cancel_handler(message: types.Message, state: FSMContext):
 
 # create meet request by state
 @dispatcher.message_handler(state=MeetRequestState.date_meet)
-async def process_name(message: types.Message, state: FSMContext):
+async def process_date_meet(message: types.Message, state: FSMContext):
     if not re.match('^\d{4}-\d{2}-\d{2}$', message.text):
         await message.reply("Введите удобную дату для проведения встречи (YYYY-MM-DD)")
         return
@@ -110,7 +112,7 @@ async def process_name(message: types.Message, state: FSMContext):
 
 
 @dispatcher.message_handler(state=MeetRequestState.meet_from)
-async def process_name(message: types.Message, state: FSMContext):
+async def process_meet_from(message: types.Message, state: FSMContext):
     if not re.match('^[0-1][0-9]:[0-5][0-9]$', message.text):
         await message.reply("Введите минимально приемлимое время начала встречи (HH-MM)")
         return
@@ -121,7 +123,7 @@ async def process_name(message: types.Message, state: FSMContext):
 
 
 @dispatcher.message_handler(state=MeetRequestState.meet_to)
-async def process_name(message: types.Message, state: FSMContext):
+async def process_meet_to(message: types.Message, state: FSMContext):
     if not re.match('^[0-1][0-9]:[0-5][0-9]$', message.text):
         await message.reply("Введите максимально приемлимое время начала встречи (HH-MM)")
         return
@@ -132,7 +134,7 @@ async def process_name(message: types.Message, state: FSMContext):
 
 
 @dispatcher.message_handler(state=MeetRequestState.date_expire)
-async def process_name(message: types.Message, state: FSMContext):
+async def process_date_expire(message: types.Message, state: FSMContext):
     if not re.match('^\d{4}-\d{2}-\d{2}$', message.text):
         await message.reply("Введите дату истечения срока заявки (YYYY-MM-DD)")
         return

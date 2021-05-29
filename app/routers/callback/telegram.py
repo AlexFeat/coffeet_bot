@@ -12,7 +12,9 @@ router = APIRouter(
 
 
 @router.post("/tg")
-async def callback_telegram(request: Dict[str, Any] = Body(...), dp: Dispatcher = Depends(bot_dispatcher)):
+async def callback_telegram(
+        request: Dict[str, Any] = Body(...),
+        dp: Dispatcher = Depends(bot_dispatcher)):
     Bot.set_current(dp.bot)
     Dispatcher.set_current(dp)
     telegram_update = types.Update(**request)
